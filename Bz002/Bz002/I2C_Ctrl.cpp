@@ -1,10 +1,34 @@
 #define ADDRESS_RX8035 0x32
 
+#define CTRL1_ADDRESS 0x0E
+#define CTRL2_ADDRESS 0x0F
+
 #include <Arduino.h>
 #include <Wire.h>
 #include "I2C_Ctrl.h"
 
 //RX8035********************
+////Ctrl1******************
+int resistorE7_MoAlarm = 0 << 7;//アラーム月
+int resistorE6_WkAlarm = 0 << 6;//アラーム曜
+
+int resistorE5_DBSL = 0 << 5;//デバウンス時間切替　0：1996ms  1：35mS
+
+int resistorE4_EventEn = 0 << 4;//イベントディテクションイネーブル
+
+int resistorE3_Test = 0 << 3;//ICテスト用
+
+int resistorE2_CT2 = 0 << 2;//定周期割込み選択
+int resistorE1_CT1 = 0 << 1;//定周期割込み選択
+int resistorE0_CT0 = 0 << 0;//定周期割込み選択
+//0 0 0：OFF
+//0 0 1：L固定
+//0 1 0：2Hz
+//0 1 1：1Hz
+//1 0 0：1秒毎
+//1 0 1：1分毎
+//1 1 0：1時間毎
+//1 1 1：1月毎
 
 
 //********************************************************************************
