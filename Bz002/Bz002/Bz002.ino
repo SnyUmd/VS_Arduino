@@ -12,13 +12,17 @@
 //********************************************************
 void setup()
 {
+	Serial.begin(115200);
+	Serial.println("Serial set succes");
+
 	Initialize_Port();
 
-	LedFlash(50, 3, false);
+	LedFlash(50, 3, true);
 
 	//InitBz();
 	BzGoUp(10, 10);
-	I2C_Init();
+
+	I2C_Init(Serial);
 	//Serial.begin(9600);
 
 	InitBt("Buzzer");
@@ -75,16 +79,23 @@ void loop()
 
 	String strTime = "";
 
-	//int iMin = GetMin();
-	//delay(200);
-	//int iSecd = GetSec();
-	//delay(200);
-	//strTime = "'" + String(iMin) + "'" + String(iSecd);
-
-	strTime = GetTime();
+	int iHour = GetHour();
+	delay(200);
+	int iMin = GetMin();
+	delay(200);
+	int iSecd = GetSec();
+	delay(200);
+	strTime = "'" + String(iHour) + "'" + String(iMin) + "'" + String(iSecd);
 
 	ESP32_BLSerial_Write(strTime, true);
-	delay(900);
+	delay(350);
+
+	//ESP32_BLSerial_Write("", true);
+	//delay(500);
+
+	//strTime = GetTime();
+	//ESP32_BLSerial_Write(strTime, true);
+	//delay(100);
 
 
 	//delay(1000);
@@ -98,9 +109,47 @@ void DataReset(int *data)
 }
 
 //********************************************************
+int GetHour()
+{
+	int iHour[2];
+	int buf;
+	int result = 0;
+	I2C_Read_RX8035(0x32, 0x02, iHour, 1, 1);
+	buf = iHour[0];
+	if (buf < 0x80)
+	{
+		//12ŽžŠÔƒ‚[ƒh
+		if (buf < 0x20)
+		{
+			Serial.println("mode 12 AM");
+		}
+		else
+		{
+			Serial.println("mode 12 PM");
+			buf = buf - 0x20;
+			result = 12;
+		}
+
+		result += buf / 16 * 10;
+		result += buf % 16;
+	}
+	else
+	{
+		Serial.println("mode 24");
+		buf -= 0x80;
+		result = buf / 16 * 10;
+		result = result + buf % 16;
+	}
+
+
+
+	return result;
+}
+
+//********************************************************
 int GetMin()
 {
-	int iMin[5];
+	int iMin[2];
 	int result = 0;
 	I2C_Read_RX8035(0x32, 0x01, iMin, 1, 1);
 
@@ -113,7 +162,7 @@ int GetMin()
 //********************************************************
 int GetSec()
 {
-	int iMin[5];
+	int iMin[1];
 	int result = 0;
 	I2C_Read_RX8035(0x32, 0x00, iMin, 1, 1);
 

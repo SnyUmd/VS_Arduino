@@ -134,6 +134,10 @@ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\
  C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\LedCtrl.h \
  C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Bzctrl.h \
  C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\I2C_Ctrl.h \
+ E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/HardwareSerial.h \
+ E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\libraries\Wire\src/Wire.h \
+ E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/esp32-hal.h \
+ E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/freertos/freertos/queue.h \
  C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Bt.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\libraries\BluetoothSerial\src/BluetoothSerial.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/bt/esp_spp_api.h \
