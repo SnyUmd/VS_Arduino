@@ -143,26 +143,44 @@ int I2C_Write_RX8035(int i2c_Address, int register_Address, byte *data, int data
 //i2c_Address:I2Cデバイスの7bitアドレス
 //dataSize:要求バイト数
 //stop：true-要求後バス要求までメッセージ停止　false-通信継続して送信を継続
-int I2C_Read_RX8035(int i2c_Address, int register_Address, int *data, int dataSize, int stop)
+//int I2C_Read_RX8035(int i2c_Address, int register_Address, int *data, int dataSize, int stop)
+int I2C_Read_RX8035(int i2c_Address, int register_Address, int *data, int dataSize)
 {
 
     String strBuf;
-    int reg_Adr = register_Address << 4;
-    reg_Adr += 4;//読出し短縮方法
+	int reg_Adr = register_Address;
+	//int reg_Adr = register_Address << 4;
+	//if (reg_Adr == 0)
+	//	reg_Adr = 0x0f;
+	//else
+	//	reg_Adr - 1;
+
+    //reg_Adr += 4;//読出し短縮方法
     //i2c_Address：デバイスの7bitアドレス
-	Wire.beginTransmission(i2c_Address);
-	Wire.write(reg_Adr);
-	Wire.endTransmission();
+	//Wire.beginTransmission(i2c_Address);
+	//Wire.write(reg_Adr);
+	//Wire.endTransmission();
 
-	Wire.requestFrom(i2c_Address, dataSize, stop);
+	Wire.requestFrom(i2c_Address, dataSize);
     int loopNum = Wire.available();//バッファにあるデータ数を取得
-    //data = new int[loopNum];
 
-	for (int i = 0; i < loopNum; i++)
+	int cnt = 0;
+	int num = 15;
+	while (Wire.available())
 	{
-		data[i] = Wire.read();
-        //strBuf = String(data[i]);
-        HwSerial.println(data[i]);
+		if (cnt == 0)
+		{
+			data[15] = Wire.read();
+			HwSerial.print("data 15 = ");
+			HwSerial.println(data[15]);
+		}
+		else
+		{
+			data[cnt - 1] = Wire.read();
+			HwSerial.print("data " + String(cnt - 1) + " = ");
+			HwSerial.println(data[cnt - 1]);
+		}
+		cnt++;
 	}
 	Wire.endTransmission();
 

@@ -1,6 +1,6 @@
-C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\LedCtrl.cpp.o: \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\LedCtrl.cpp \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\LedCtrl.h \
+C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\LedCtrl.cpp.o: \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\LedCtrl.cpp \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\LedCtrl.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Arduino.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/stdint.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/machine/_default_types.h \
@@ -128,4 +128,4 @@ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/HardwareSerial.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Esp.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\variants\esp32/pins_arduino.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\def.h
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\def.h

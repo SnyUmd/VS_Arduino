@@ -1,4 +1,4 @@
-C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\BluetoothSerial\BluetoothSerial.cpp.o: \
+C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\BluetoothSerial\BluetoothSerial.cpp.o: \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\libraries\BluetoothSerial\src\BluetoothSerial.cpp \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/config/sdkconfig.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/freertos/freertos/FreeRTOS.h \

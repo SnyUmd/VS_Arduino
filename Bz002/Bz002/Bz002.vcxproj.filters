@@ -42,6 +42,9 @@
     <ClInclude Include="Bt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsRtcList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Init.cpp">
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clsRtcList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

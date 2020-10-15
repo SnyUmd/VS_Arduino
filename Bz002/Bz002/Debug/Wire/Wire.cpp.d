@@ -1,4 +1,4 @@
-C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Wire\Wire.cpp.o: \
+C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\Wire\Wire.cpp.o: \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\libraries\Wire\src\Wire.cpp \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/stdlib.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/machine/ieeefp.h \

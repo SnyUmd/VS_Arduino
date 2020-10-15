@@ -1,5 +1,5 @@
-C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Bz002.cpp.o: \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Bz002.cpp \
+C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\Bz002.cpp.o: \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\Bz002.cpp \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/arduino.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/stdint.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/machine/_default_types.h \
@@ -128,17 +128,18 @@ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Esp.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Arduino.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\variants\esp32/pins_arduino.h \
- c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\taznonos.td4\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\def.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Init.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\LedCtrl.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Bzctrl.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\I2C_Ctrl.h \
+ c:\program\ files\ (x86)\microsoft\ visual\ studio\2017\community\common7\ide\extensions\taznonos.td4\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\def.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\Init.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\LedCtrl.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\Bzctrl.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\I2C_Ctrl.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/HardwareSerial.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\libraries\Wire\src/Wire.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/esp32-hal.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/freertos/freertos/queue.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\Bt.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\Bt.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\libraries\BluetoothSerial\src/BluetoothSerial.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/bt/esp_spp_api.h \
- E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/bt/esp_bt_defs.h
+ E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/bt/esp_bt_defs.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\clsRtcList.h

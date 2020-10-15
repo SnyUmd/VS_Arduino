@@ -1,5 +1,5 @@
-C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\I2C_Ctrl.cpp.o: \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\I2C_Ctrl.cpp \
+C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\I2C_Ctrl.cpp.o: \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\I2C_Ctrl.cpp \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/HardwareSerial.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/inttypes.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/newlib.h \
@@ -114,7 +114,7 @@ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/esp32-hal.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/freertos/freertos/queue.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Stream.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\I2C_Ctrl.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\I2C_Ctrl.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Arduino.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/freertos/freertos/task.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/freertos/freertos/semphr.h \
@@ -133,5 +133,5 @@ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/HardwareSerial.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Esp.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\variants\esp32/pins_arduino.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\LedCtrl.h \
- C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\def.h
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\LedCtrl.h \
+ C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\def.h

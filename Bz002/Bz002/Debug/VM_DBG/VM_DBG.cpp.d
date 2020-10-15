@@ -1,6 +1,6 @@
-C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32wrover\Debug\VM_DBG\VM_DBG.cpp.o: \
- c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\taznonos.td4\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.cpp \
- c:\program\ files\ (x86)\microsoft\ visual\ studio\2019\community\common7\ide\extensions\taznonos.td4\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.h \
+C:\Users\sny-acer\AppData\Local\Temp\VMBuilds\Bz002\espressif_esp32\Debug\VM_DBG\VM_DBG.cpp.o: \
+ c:\program\ files\ (x86)\microsoft\ visual\ studio\2017\community\common7\ide\extensions\taznonos.td4\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.cpp \
+ c:\program\ files\ (x86)\microsoft\ visual\ studio\2017\community\common7\ide\extensions\taznonos.td4\Micro\ Platforms\default\debuggers\VM_DBG\VM_DBG.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32\cores\esp32/Arduino.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/stdint.h \
  E:\!SNY\Document\Documents\Arduino\hardware\espressif\esp32/tools/sdk/include/newlib/machine/_default_types.h \

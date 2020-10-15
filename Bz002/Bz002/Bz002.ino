@@ -6,6 +6,27 @@
 #include "Bzctrl.h"
 #include "I2C_Ctrl.h"
 #include "Bt.h"
+#include "clsRtcList.h"
+
+enum enmRtcData
+{
+	seconds = 0,
+	minutes,
+	hours,
+	day_of_week,
+	day_of_month,
+	month,
+	years,
+	digiral_offset,
+	alarm_wk_minute,
+	alarm_wk_hour,
+	alarm_wk_day_of_week,
+	alarm_mo_minute,
+	alarm_mo_hour,
+	ram,
+	ctrl1,
+	ctrl2
+};
 
 //extern float flSound[][12];
 //extern int beat;
@@ -78,27 +99,30 @@ void loop()
 	//	ESP32_BLSerial_Write(String(data[i]), true);
 
 	String strTime = "";
+	int iBuf[16];
 
-	int iHour = GetHour();
+	/*int iHour = GetHour();
 	delay(200);
 	int iMin = GetMin();
-	delay(200);
-	int iSecd = GetSec();
-	delay(200);
-	strTime = "'" + String(iHour) + "'" + String(iMin) + "'" + String(iSecd);
+	delay(200);*/
+	//int iSecd = GetSec();
+	//delay(200);
+	//strTime = "'" + String(iHour) + "'" + String(iMin) + "'" + String(iSecd);
+	//strTime = String(iSecd);
 
-	ESP32_BLSerial_Write(strTime, true);
-	delay(350);
-
-	//ESP32_BLSerial_Write("", true);
-	//delay(500);
-
-	//strTime = GetTime();
 	//ESP32_BLSerial_Write(strTime, true);
-	//delay(100);
+	//delay(350);
 
+	//I2C_Read_RX8035(0x32, 0x0e, iBuf, 1);
+	//I2C_Read_RX8035(0x32, 0x0d, iBuf, 1);
 
-	//delay(1000);
+	//I2C_Read_RX8035(0x32, 0x0f, iBuf, 1);
+	//I2C_Read_RX8035(0x32, 0x00, iBuf, 1);
+	//I2C_Read_RX8035(0x32, 0x01, iBuf, 1);
+
+	I2C_Read_RX8035(0x32, 0x00, iBuf, 16);
+
+	delay(1000);
 }
 
 void DataReset(int *data)
@@ -111,10 +135,10 @@ void DataReset(int *data)
 //********************************************************
 int GetHour()
 {
-	int iHour[2];
+	int iHour[2] = { 0,0 };
 	int buf;
 	int result = 0;
-	I2C_Read_RX8035(0x32, 0x02, iHour, 1, 1);
+	I2C_Read_RX8035(0x32, 0x02, iHour, 1);
 	buf = iHour[0];
 	if (buf < 0x80)
 	{
@@ -151,7 +175,7 @@ int GetMin()
 {
 	int iMin[2];
 	int result = 0;
-	I2C_Read_RX8035(0x32, 0x01, iMin, 1, 1);
+	I2C_Read_RX8035(0x32, 0x01, iMin, 1);
 
 	result = iMin[0] / 16 * 10;
 	result = result + iMin[0] % 16;
@@ -164,7 +188,7 @@ int GetSec()
 {
 	int iMin[1];
 	int result = 0;
-	I2C_Read_RX8035(0x32, 0x00, iMin, 1, 1);
+	I2C_Read_RX8035(0x32, 0x00, iMin, 1);
 
 	result = iMin[0] / 16 * 10;
 	result = result + iMin[0] % 16;
@@ -178,7 +202,7 @@ String GetTime()
 	int iTime[5];
 	int iH, im, is;
 	String result = "";
-	I2C_Read_RX8035(0x32, 0x00, iTime, 3, 1);
+	I2C_Read_RX8035(0x32, 0x00, iTime, 3);
 
 	iH = iTime[2] / 16 * 10;
 	iH += iTime[2] % 16;
