@@ -9,6 +9,26 @@
 #include "I2C_Ctrl.h"
 #include "LedCtrl.h"
 
+enum enmRtcData
+{
+	seconds = 0,
+	minutes,
+	hours,
+	day_of_week,
+	day_of_month,
+	month,
+	years,
+	digiral_offset,
+	alarm_wk_minute,
+	alarm_wk_hour,
+	alarm_wk_day_of_week,
+	alarm_mo_minute,
+	alarm_mo_hour,
+	ram,
+	ctrl1,
+	ctrl2
+};
+
 //RX8035********************
 //Ctrl1-----------------------------------------------------------------------------------------------
 int resistorE7_MoAlarm = 0 << 7;//アラーム月
@@ -81,6 +101,50 @@ void Init_RX8035()
 	//Serial.println("Ctrl1 = " + String(Write_Ctrl1_Data[0]));
 	//Serial.println("Ctrl2 = " + String(Write_Ctrl2_Data[0]));
 
+	byte byBuf[1];
+
+	byBuf[0] = { 0x00 };
+	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x02, byBuf, 1) != 0)
+	{
+		HwSerial.println("hour write Err");
+
+		while (1)
+		{
+			LedFlash(50, 3, false);
+		}
+	}
+	else
+		HwSerial.println("Sec write success");
+
+	byBuf[0] = { 0x11 };
+	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x01, byBuf, 1) != 0)
+	{
+		HwSerial.println("min write Err");
+
+		while (1)
+		{
+			LedFlash(50, 3, false);
+		}
+	}
+	else
+		HwSerial.println("Sec write success");
+
+	byBuf[0] = { 0x30 };
+	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x00, byBuf, 1) != 0)
+	{
+		HwSerial.println("min write Err");
+
+		while (1)
+		{
+			LedFlash(50, 3, false);
+		}
+	}
+	else
+		HwSerial.println("Sec write success");
+
+
+	//---------------------------------------------
+
 	if (I2C_Write_RX8035(ADDRESS_RX8035, CTRL1_ADDRESS, Write_Ctrl1_Data, 1) != 0)
 	{
 		HwSerial.println("Ctrl1 write Err");
@@ -105,19 +169,6 @@ void Init_RX8035()
 	else
 		HwSerial.println("Ctrl2 write success");
 
-	byte byBuf[1] = { 0x31 };
-	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x02, byBuf, 1) != 0)
-	{
-		HwSerial.println("Sec write Err");
-
-		while (1)
-		{
-			LedFlash(50, 3, false);
-		}
-	}
-	else
-		HwSerial.println("Sec write success");
-
 }
 
 
@@ -138,6 +189,7 @@ int I2C_Write(int i2c_Address, int register_Address, byte *data, int writeDataSi
 	// 4: その他エラー
 }
 
+//********************************************************************************
 bool I2C_Read(int i2c_Address, int register_Address, int *data, int readDataSize)
 {
 	//これはいらないかも　何かでやってみて確認---------------------
@@ -223,24 +275,52 @@ int I2C_Read_RX8035_All(int i2c_Address,  int *data)
 
 
 
-
 //********************************************************************************
-//void I2C_Read_RX8035_0(int i2c_Address, int register_Address, int *data, int readDataSize, int stop)
-//{
-//	int reg_Adr = register_Address << 4;
-//	reg_Adr += 4;
-//	//i2c_Address：デバイスの7bitアドレス
-//	Wire.beginTransmission(i2c_Address);
-//	Wire.write(reg_Adr);
-//	Wire.endTransmission();
-//	//Wire.requestFrom(id, datasize, false);
-//
-//	//i2c_Address:I2Cデバイスの7bitアドレス
-//	//dataSize:要求バイト数
-//	//stop：true-要求後バス要求までメッセージ停止　false-通信継続して送信を継続
-//	Wire.requestFrom(i2c_Address, readDataSize, stop);
-//	int loopNum = Wire.available();
-//	for (int i = 0; i < loopNum; i++)
-//		data[i] = Wire.read();
-//	Wire.endTransmission();
-//}
+String GetTime(int *data)
+{
+	int buf;
+	int result = 0;
+	String strRtn = "";
+
+	//時----------------------------------------------
+	buf = data[hours];
+	if (buf < 0x80)
+	{
+		//12時間モード
+		if (buf < 0x20)
+		{
+			Serial.println("mode 12 AM");
+		}
+		else
+		{
+			Serial.println("mode 12 PM");
+			buf = buf - 0x20;
+			result = 12;
+		}
+
+		result += buf / 16 * 10;
+		result += buf % 16;
+	}
+	else
+	{
+		Serial.println("mode 24");
+		buf -= 0x80;
+		result = buf / 16 * 10;
+		result = result + buf % 16;
+	}
+	strRtn += "'" + String(result);
+
+	//分----------------------------------------------
+	buf = data[minutes];
+	result = data[minutes] / 16 * 10;
+	result = result + data[minutes] % 16;
+	strRtn += "'" + String(result);
+
+	//秒----------------------------------------------
+	buf = data[seconds];
+	result = data[seconds] / 16 * 10;
+	result = result + data[seconds] % 16;
+	strRtn += "'" + String(result);
+
+	return strRtn;
+}

@@ -44,9 +44,10 @@ void setup()
 	BzGoUp(10, 10);
 
 	I2C_Init(Serial);
+	Init_RX8035();
 	//Serial.begin(9600);
 
-	InitBt("Buzzer");
+	InitBt("RtcBLE");
 }
 
 //****************************************************************************************************************
@@ -56,18 +57,16 @@ void loop()
 	String strTime = "";
 	int iBuf[16];
 	
-	Serial.println("******** " + String(cnt) + " ********");
+	Serial.println("******** ");
 	I2C_Read_RX8035_All(0x32, iBuf);
-	cnt++;
-	delay(100);
+
+	strTime = GetTime(iBuf);
+	Serial.println(strTime);
+	ESP32_BLSerial_Write(strTime, true);
+	delay(980);
 }
 
-void DataReset(int *data)
-{
-	int loopNum = sizeof(data) / sizeof(*data);
-	for (int i = 0; i < loopNum; i++)
-		data[i] = 0;
-}
+
 
 //****************************************************************************************************************
 //****************************************************************************************************************
@@ -103,8 +102,6 @@ int GetHour()
 		result = buf / 16 * 10;
 		result = result + buf % 16;
 	}
-
-
 
 	return result;
 }
