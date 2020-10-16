@@ -74,7 +74,10 @@ void I2C_Init(HardwareSerial& hs_serial)
 	Wire.begin();
 }
 
-
+bool blTimeSet = false;
+int i_h = 0x00;
+int i_m = 0x28;
+int i_s = 0x00;
 //********************************************************************************
 void Init_RX8035()
 {
@@ -101,48 +104,50 @@ void Init_RX8035()
 	//Serial.println("Ctrl1 = " + String(Write_Ctrl1_Data[0]));
 	//Serial.println("Ctrl2 = " + String(Write_Ctrl2_Data[0]));
 
-	byte byBuf[1];
-
-	byBuf[0] = { 0x00 };
-	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x02, byBuf, 1) != 0)
+	if (blTimeSet)
 	{
-		HwSerial.println("hour write Err");
+		byte byBuf[1];
 
-		while (1)
+		byBuf[0] = { i_h };
+		if (I2C_Write_RX8035(ADDRESS_RX8035, 0x02, byBuf, 1) != 0)
 		{
-			LedFlash(50, 3, false);
+			HwSerial.println("hour write Err");
+
+			while (1)
+			{
+				LedFlash(50, 3, false);
+			}
 		}
-	}
-	else
-		HwSerial.println("Sec write success");
+		else
+			HwSerial.println("Sec write success");
 
-	byBuf[0] = { 0x11 };
-	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x01, byBuf, 1) != 0)
-	{
-		HwSerial.println("min write Err");
-
-		while (1)
+		byBuf[0] = { i_m };
+		if (I2C_Write_RX8035(ADDRESS_RX8035, 0x01, byBuf, 1) != 0)
 		{
-			LedFlash(50, 3, false);
+			HwSerial.println("min write Err");
+
+			while (1)
+			{
+				LedFlash(50, 3, false);
+			}
 		}
-	}
-	else
-		HwSerial.println("Sec write success");
+		else
+			HwSerial.println("Sec write success");
 
-	byBuf[0] = { 0x30 };
-	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x00, byBuf, 1) != 0)
-	{
-		HwSerial.println("min write Err");
-
-		while (1)
+		byBuf[0] = { i_s };
+		if (I2C_Write_RX8035(ADDRESS_RX8035, 0x00, byBuf, 1) != 0)
 		{
-			LedFlash(50, 3, false);
+			HwSerial.println("min write Err");
+
+			while (1)
+			{
+				LedFlash(50, 3, false);
+			}
 		}
+		else
+			HwSerial.println("Sec write success");
+
 	}
-	else
-		HwSerial.println("Sec write success");
-
-
 	//---------------------------------------------
 
 	if (I2C_Write_RX8035(ADDRESS_RX8035, CTRL1_ADDRESS, Write_Ctrl1_Data, 1) != 0)
