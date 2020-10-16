@@ -10,7 +10,7 @@
 #include "LedCtrl.h"
 
 //RX8035********************
-//Ctrl1-------------------
+//Ctrl1-----------------------------------------------------------------------------------------------
 int resistorE7_MoAlarm = 0 << 7;//アラーム月
 int resistorE6_WkAlarm = 0 << 6;//アラーム曜
 
@@ -32,10 +32,10 @@ int resistorE0_CT0 = 0 << 0;//定周期割込み選択
 //1 1 0：1時間毎
 //1 1 1：1月毎
 
-//Ctrl2-------------------
+//Ctrl2-----------------------------------------------------------------------------------------------
 int resistorF7_Bank = 0 << 7;
 int resistorF6_Vdetect = 0 << 6;//※書込み時は0固定　
-                                //※秒桁を書き込んだ後は必ず0を書き込む事
+								//※秒桁を書き込んだ後は必ず0を書き込む事
 
 int resistorF5_Xstep = 0 << 5;//発振停止を検出で0クリアするまで1を維持
 int resistorF4_PowerOnFlg = 0 << 4;//初期投入で0クリアまで1を維持
@@ -50,93 +50,142 @@ HardwareSerial HwSerial = Serial;
 //********************************************************************************
 void I2C_Init(HardwareSerial& hs_serial)
 {
-    HwSerial = hs_serial;
-    Wire.begin();
+	HwSerial = hs_serial;
+	Wire.begin();
+}
 
-    byte Write_Ctrl1_Data[1];
-    byte Write_Ctrl2_Data[1];
 
-    Write_Ctrl1_Data[0] =   resistorE7_MoAlarm +
-                            resistorE6_WkAlarm +
-                            resistorE5_DBSL +
-                            resistorE4_EventEn +
-                            resistorE3_Test +
-                            resistorE2_CT2 +
-                            resistorE1_CT1 +
-                            resistorE0_CT0;
+//********************************************************************************
+void Init_RX8035()
+{
+	byte Write_Ctrl1_Data[1];
+	byte Write_Ctrl2_Data[1];
 
-    Write_Ctrl2_Data[0] =   resistorF7_Bank +
-                            resistorF6_Vdetect +
-                            resistorF5_Xstep +
-                            resistorF4_PowerOnFlg +
-                            resistorF3_EdgeFlg +
-                            resistorF2_CTFG +
-                            resistorF1_WkAlarmFlg +
-                            resistorF0_MoAlarmFlg;
-    //Serial.println("Ctrl1 = " + String(Write_Ctrl1_Data[0]));
-    //Serial.println("Ctrl2 = " + String(Write_Ctrl2_Data[0]));
+	Write_Ctrl1_Data[0] = resistorE7_MoAlarm +
+		resistorE6_WkAlarm +
+		resistorE5_DBSL +
+		resistorE4_EventEn +
+		resistorE3_Test +
+		resistorE2_CT2 +
+		resistorE1_CT1 +
+		resistorE0_CT0;
 
-    delay(200);
-    if (I2C_Write_RX8035(ADDRESS_RX8035, CTRL1_ADDRESS, Write_Ctrl1_Data, 1) != 0)
-    {
-        HwSerial.println("Ctrl1 write Err");
+	Write_Ctrl2_Data[0] = resistorF7_Bank +
+		resistorF6_Vdetect +
+		resistorF5_Xstep +
+		resistorF4_PowerOnFlg +
+		resistorF3_EdgeFlg +
+		resistorF2_CTFG +
+		resistorF1_WkAlarmFlg +
+		resistorF0_MoAlarmFlg;
+	//Serial.println("Ctrl1 = " + String(Write_Ctrl1_Data[0]));
+	//Serial.println("Ctrl2 = " + String(Write_Ctrl2_Data[0]));
 
-        while (1)
-        {
-            LedFlash(50, 3, false);
-        }
-    }
-    else
-        HwSerial.println("Ctrl1 write success");
+	if (I2C_Write_RX8035(ADDRESS_RX8035, CTRL1_ADDRESS, Write_Ctrl1_Data, 1) != 0)
+	{
+		HwSerial.println("Ctrl1 write Err");
 
-    delay(200);
-    if (I2C_Write_RX8035(ADDRESS_RX8035, CTRL2_ADDRESS, Write_Ctrl2_Data, 1) != 0)
-    {
-        HwSerial.println("Ctrl2 write Err");
+		while (1)
+		{
+			LedFlash(50, 3, false);
+		}
+	}
+	else
+		HwSerial.println("Ctrl1 write success");
 
-        while (1)
-        {
-            LedFlash(50, 3, false);
-        }
-    }
-    else
-        HwSerial.println("Ctrl2 write success");
-    delay(200);
+	if (I2C_Write_RX8035(ADDRESS_RX8035, CTRL2_ADDRESS, Write_Ctrl2_Data, 1) != 0)
+	{
+		HwSerial.println("Ctrl2 write Err");
 
-    byte byBuf[1] = { 0x31 };
-    if (I2C_Write_RX8035(ADDRESS_RX8035, 0x02, byBuf, 1) != 0)
-    {
-        HwSerial.println("Sec write Err");
+		while (1)
+		{
+			LedFlash(50, 3, false);
+		}
+	}
+	else
+		HwSerial.println("Ctrl2 write success");
 
-        while (1)
-        {
-            LedFlash(50, 3, false);
-        }
-    }
-    else
-        HwSerial.println("Sec write success");
+	byte byBuf[1] = { 0x31 };
+	if (I2C_Write_RX8035(ADDRESS_RX8035, 0x02, byBuf, 1) != 0)
+	{
+		HwSerial.println("Sec write Err");
 
-    //delay(200);
+		while (1)
+		{
+			LedFlash(50, 3, false);
+		}
+	}
+	else
+		HwSerial.println("Sec write success");
 
 }
+
+
+
+
+//********************************************************************************
+int I2C_Write(int i2c_Address, int register_Address, byte *data, int writeDataSize)
+{
+	Wire.beginTransmission(i2c_Address);
+	Wire.write(register_Address);
+	Wire.write(data, writeDataSize);
+
+	return Wire.endTransmission();
+	// 0: 成功
+	// 1: 送信バッファ溢れ
+	// 2: アドレス送信時にNACKを受信
+	// 3: データ送信時にNACKを受信
+	// 4: その他エラー
+}
+
+bool I2C_Read(int i2c_Address, int register_Address, int *data, int readDataSize)
+{
+	//これはいらないかも　何かでやってみて確認---------------------
+	//読込むレジスタアドレス指定の書き込み
+	Wire.beginTransmission(i2c_Address);
+	Wire.write(register_Address);
+	if (Wire.endTransmission() > 0)
+		return false;
+	//-------------------------------------------------------------
+
+	Wire.requestFrom(i2c_Address, readDataSize);
+	//int loopNum = Wire.available();//バッファにあるデータ数を取得
+
+	int cnt = 0;
+	while (Wire.available())
+	{
+		data[cnt] = Wire.read();
+		HwSerial.print("data " + String(cnt) + " = ");
+		HwSerial.println(data[cnt]);
+		cnt++;
+	}
+	Wire.endTransmission();
+
+	return true;//データ数を返す
+}
+
+
+
+
+
+
 
 //********************************************************************************
 int I2C_Write_RX8035(int i2c_Address, int register_Address, byte *data, int dataSize)
 {
-    //char w_Adr = i2c_Address << 1  + 1;
-    char reg_Adr = register_Address << 4;
+	char reg_Adr = register_Address << 4;
 
-    Wire.beginTransmission(i2c_Address);
+	Wire.beginTransmission(i2c_Address);
 	Wire.write(reg_Adr);
 	//Wire.write(data);
 	Wire.write(data, dataSize);
-    
+
 	return Wire.endTransmission();
-    // 0: 成功
-    // 1: 送信バッファ溢れ
-    // 2: アドレス送信時にNACKを受信
-    // 3: データ送信時にNACKを受信
-    // 4: その他エラー
+	// 0: 成功
+	// 1: 送信バッファ溢れ
+	// 2: アドレス送信時にNACKを受信
+	// 3: データ送信時にNACKを受信
+	// 4: その他エラー
 }
 
 //********************************************************************************
@@ -144,25 +193,10 @@ int I2C_Write_RX8035(int i2c_Address, int register_Address, byte *data, int data
 //dataSize:要求バイト数
 //stop：true-要求後バス要求までメッセージ停止　false-通信継続して送信を継続
 //int I2C_Read_RX8035(int i2c_Address, int register_Address, int *data, int dataSize, int stop)
-int I2C_Read_RX8035(int i2c_Address, int register_Address, int *data, int dataSize)
+int I2C_Read_RX8035_All(int i2c_Address,  int *data)
 {
-
-    String strBuf;
-	int reg_Adr = register_Address;
-	//int reg_Adr = register_Address << 4;
-	//if (reg_Adr == 0)
-	//	reg_Adr = 0x0f;
-	//else
-	//	reg_Adr - 1;
-
-    //reg_Adr += 4;//読出し短縮方法
-    //i2c_Address：デバイスの7bitアドレス
-	//Wire.beginTransmission(i2c_Address);
-	//Wire.write(reg_Adr);
-	//Wire.endTransmission();
-
-	Wire.requestFrom(i2c_Address, dataSize);
-    int loopNum = Wire.available();//バッファにあるデータ数を取得
+	Wire.requestFrom(i2c_Address, 16);
+	int loopNum = Wire.available();//バッファにあるデータ数を取得
 
 	int cnt = 0;
 	int num = 15;
@@ -184,8 +218,10 @@ int I2C_Read_RX8035(int i2c_Address, int register_Address, int *data, int dataSi
 	}
 	Wire.endTransmission();
 
-    return loopNum;
+	return loopNum;
 }
+
+
 
 
 //********************************************************************************
